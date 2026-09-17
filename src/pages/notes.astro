@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { db, ensureSchema } from '../lib/db.js';
+ensureSchema();
+const result = await db.execute('SELECT id, title, body, created_at, updated_at FROM notes ORDER BY id DESC');
+const notes = result.rows;
+---
+<BaseLayout>
+  <h2>Notes</h2>
+  <form method="post" action="/api/notes" id="new-note">
+    <input name="title" placeholder="Title" required maxlength="200" />
+    <textarea name="body" placeholder="Body (optional)" maxlength="5000"></textarea>
+    <button type="submit">Add</button>
+  </form>
+  <ul class="notes">
+    {notes.map((n) => (
+      <li data-id={n.id}>
+        <form method="post" action={`/api/notes/${n.id}?_method=PUT`} class="edit">
+          <input name="title" value={String(n.title ?? '')} maxlength="200" required />
+          <textarea name="body" maxlength="5000">{n.body}</textarea>
+          <div class="row">
+            <button type="submit">Save</button>
+            <button type="submit" formaction={`/api/notes/${n.id}?_method=DELETE`} class="del">Delete</button>
+          </div>
+        </form>
+        <small>{n.created_at} · id {String(n.id)}</small>
+      </li>
+    ))}
+  </ul>
+  <script is:inline>
+    document.querySelectorAll('.notes .edit').forEach((f) => {
+      f.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const li = f.closest('li');
+        const id = li?.dataset.id;
+        const m = new URL(f.action).searchParams.get('_method') || 'PUT';
+        const fd = new FormData(f);
+        const res = await fetch(`/api/notes/${id}${m === 'DELETE' ? '' : ''}`, {
+          method: m === 'DELETE' ? 'DELETE' : 'PUT',
+          body: fd,
+        });
+        if (res.ok) location.reload();
+      });
+    });
+  </script>
+</BaseLayout>

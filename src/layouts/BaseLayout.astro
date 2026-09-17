@@ -1,0 +1,23 @@
+---
+import '../styles/global.css';
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>mc-webapp</title>
+  </head>
+  <body>
+    <header><h1>mc-webapp</h1></header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/notes">Notes</a>
+      <a href="/files">Files</a>
+      <a href="/api/health" target="_blank" rel="noopener">Health</a>
+    </nav>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

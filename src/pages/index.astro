@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout>
+  <p>A basic Magic Containers demo: Astro + Hono + SQLite, single container, persistent volume at <code>/data</code>.</p>
+  <ul>
+    <li><a href="/notes">Notes</a> — create/read/update/delete against <code>notes</code> table in SQLite.</li>
+    <li><a href="/files">Files</a> — upload text/PNG/JPEG files to <code>/data/uploads</code>.</li>
+    <li><a href="/api/health">/api/health</a> — JSON heartbeat, includes server time.</li>
+  </ul>
+</BaseLayout>

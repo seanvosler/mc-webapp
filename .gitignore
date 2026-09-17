@@ -1,0 +1,11 @@
+node_modules/
+.astro/
+dist/
+.env
+.env.local
+data/app.db
+data/app.db-shm
+data/app.db-wal
+data/uploads/*
+!data/uploads/.gitkeep
+.DS_Store

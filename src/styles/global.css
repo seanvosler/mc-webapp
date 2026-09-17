@@ -1,0 +1,16 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+body { max-width: 880px; margin: 0 auto; padding: 1rem 1.25rem; }
+header h1 { margin: 0.25rem 0 0.5rem; }
+nav { display: flex; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #ccc4; }
+nav a { color: inherit; }
+main { padding-top: 1rem; }
+code { background: #8882; padding: 0 0.25rem; border-radius: 4px; }
+input, textarea, button { font: inherit; padding: 0.4rem 0.6rem; margin: 0.25rem 0; }
+textarea { width: 100%; min-height: 4rem; }
+input[type=text], input:not([type]) { width: 100%; }
+.notes { list-style: none; padding: 0; display: grid; gap: 0.5rem; }
+.notes li { border: 1px solid #8884; border-radius: 6px; padding: 0.5rem 0.75rem; }
+.row { display: flex; gap: 0.5rem; }
+.del { background: #b33; color: #fff; border: 0; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.35rem 0.5rem; border-bottom: 1px solid #8884; text-align: left; }

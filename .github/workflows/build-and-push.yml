@@ -37,7 +37,7 @@ jobs:
           tags: |
             type=ref,event=branch
             type=sha,format=short
-            type=raw,value=v0.1.0,enable={{is_default_branch}}
+            type=raw,value=v0.1.0
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -47,11 +47,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Show resolved digest
+      - name: Show resolved tags
         run: |
-          echo "### Resolved image digests" >> "$GITHUB_STEP_SUMMARY"
-          for tag in ${{ steps.meta.outputs.tags }}; do
-            echo "- \`$tag\`" >> "$GITHUB_STEP_SUMMARY"
-          done
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "Bunny will pull: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main\` (or any tag)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Image pushed with the following tags:"
+          printf '  %s\n' ${{ steps.meta.outputs.tags }}
+          echo ""
+          echo "Bunny image reference (recommended): ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@main"
+          echo "(Bunny accepts any tag; @main or @v0.1.0 are both fine.)"
